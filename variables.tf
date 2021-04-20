@@ -67,7 +67,7 @@ variable "services" {
     deployment_minimum_healthy_percent = optional(number)
     deployment_maximum_percent         = optional(number)
 
-    load_balancers = list(object({
+    load_balancers = map(object({
       elb_name         = optional(string)
       target_group_arn = optional(string)
       container_name   = string
