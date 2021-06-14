@@ -52,6 +52,24 @@ resource "aws_ecs_service" "ecs-service" {
     }
   }
 
+  dynamic "placement_constraints" {
+    for_each = each.value.placement_constraints
+
+    content {
+      type       = placement_constraints.value.type
+      expression = placement_constraints.value.expression
+    }
+  }
+
+  dynamic "ordered_placement_strategy" {
+    for_each = each.value.ordered_placement_strategies
+
+    content {
+      type  = ordered_placement_strategy.value.type
+      field = ordered_placement_strategy.value.field
+    }
+  }
+
   dynamic "service_registries" {
     for_each = var.enable_service_discovery ? [1] : []
     content {

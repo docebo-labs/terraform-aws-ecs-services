@@ -89,6 +89,16 @@ variable "services" {
       type = optional(string)
     }))
 
+    placement_constraints = map(object({
+      type       = string
+      expression = optional(string)
+    }))
+
+    ordered_placement_strategies = map(object({
+      type  = string
+      field = optional(string)
+    }))
+
     network_configuration = optional(object({
       subnets          = list(string)
       security_groups  = list(string)
