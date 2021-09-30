@@ -35,12 +35,13 @@ resource "aws_ecs_service" "ecs-service" {
   name                = each.key
   cluster             = var.ecs_cluster_arn
   task_definition     = each.value.task_definition_arn
-  launch_type         = each.value.launch_type
-  scheduling_strategy = each.value.scheduling_strategy
+  launch_type         = try(each.value.launch_type, null)
+  scheduling_strategy = try(each.value.scheduling_strategy, null)
 
-  desired_count                      = each.value.desired_count
-  deployment_minimum_healthy_percent = each.value.deployment_minimum_healthy_percent
-  deployment_maximum_percent         = each.value.deployment_maximum_percent
+  desired_count                      = try(each.value.desired_count, null)
+  deployment_minimum_healthy_percent = try(each.value.deployment_minimum_healthy_percent, null)
+  deployment_maximum_percent         = try(each.value.deployment_maximum_percent, null)
+  health_check_grace_period_seconds  = try(each.value.health_check_grace_period_seconds, null)
 
   dynamic "load_balancer" {
     for_each = each.value.load_balancers

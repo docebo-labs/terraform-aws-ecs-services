@@ -67,6 +67,7 @@ variable "services" {
     desired_count                      = optional(number)
     deployment_minimum_healthy_percent = optional(number)
     deployment_maximum_percent         = optional(number)
+    health_check_grace_period_seconds  = optional(number)
 
     load_balancers = map(object({
       elb_name         = optional(string)
