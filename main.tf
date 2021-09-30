@@ -35,7 +35,7 @@ resource "aws_ecs_service" "ecs-service" {
   name                = each.key
   cluster             = var.ecs_cluster_arn
   task_definition     = each.value.task_definition_arn
-  launch_type         = try(each.value.launch_type, null)
+  launch_type         = try(each.value.launch_type, null, "EC2")
   scheduling_strategy = try(each.value.scheduling_strategy, null)
 
   desired_count                      = try(each.value.desired_count, null)
