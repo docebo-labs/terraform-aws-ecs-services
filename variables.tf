@@ -62,6 +62,7 @@ variable "services" {
   type = map(object({
     task_definition_arn = string
     launch_type         = optional(string)
+    scheduling_strategy = optional(string)
 
     desired_count                      = optional(number)
     deployment_minimum_healthy_percent = optional(number)

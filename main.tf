@@ -32,10 +32,11 @@ resource "aws_service_discovery_service" "this" {
 resource "aws_ecs_service" "ecs-service" {
   for_each = var.services
 
-  name            = each.key
-  cluster         = var.ecs_cluster_arn
-  task_definition = each.value.task_definition_arn
-  launch_type     = each.value.launch_type
+  name                = each.key
+  cluster             = var.ecs_cluster_arn
+  task_definition     = each.value.task_definition_arn
+  launch_type         = each.value.launch_type
+  scheduling_strategy = each.value.scheduling_strategy
 
   desired_count                      = each.value.desired_count
   deployment_minimum_healthy_percent = each.value.deployment_minimum_healthy_percent
