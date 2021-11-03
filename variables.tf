@@ -101,6 +101,12 @@ variable "services" {
       field = optional(string)
     }))
 
+    service_registry_configuration = optional(object({
+      container_port = number
+      container_name = string
+      port           = number
+    }))
+
     network_configuration = optional(object({
       subnets          = list(string)
       security_groups  = list(string)

@@ -75,7 +75,10 @@ resource "aws_ecs_service" "ecs-service" {
   dynamic "service_registries" {
     for_each = var.enable_service_discovery ? [1] : []
     content {
-      registry_arn = aws_service_discovery_service.this[each.key].arn
+      registry_arn   = aws_service_discovery_service.this[each.key].arn
+      container_name = try(each.value.service_registry_configuration.container_name, null)
+      container_port = try(each.value.service_registry_configuration.container_port, null)
+      port           = try(each.value.service_registry_configuration.port, null)
     }
   }
 
