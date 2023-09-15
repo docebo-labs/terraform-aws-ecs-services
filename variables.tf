@@ -13,7 +13,7 @@ variable "ecs_cluster_arn" {
   description = "The ARN of the ECS Cluster where these services will be created"
 
   validation {
-    condition     = can(regex("^arn:aws:ecs:\\w{2}-\\w+-[[:digit:]]:[[:digit:]]+:cluster/.+$", var.ecs_cluster_arn))
+    condition     = can(regex("^arn:aws(-\\w+)?(-\\w+)?:ecs:\\w{2}(-\\w+)?-\\w+-[[:digit:]]:[[:digit:]]+:cluster/.+$", var.ecs_cluster_arn))
     error_message = "Invalid ARN passed."
   }
 }
