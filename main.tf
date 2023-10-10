@@ -87,4 +87,7 @@ resource "aws_ecs_service" "ecs-service" {
       assign_public_ip = each.value.network_configuration.assign_public_ip
     }
   }
+  lifecycle {
+    ignore_changes = [task_definition]
+  }
 }
